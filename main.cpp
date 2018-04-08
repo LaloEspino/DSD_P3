@@ -16,10 +16,10 @@
 
 #include "gfx.h"
 #include <iostream>
-#include <stdio.h>      /* printf, scanf, puts, NULL */
+#include <stdio.h>      /* printf, NULL */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
-#include <math.h>
+#include <math.h>       /* sqrt */
 
 using namespace std;
 
@@ -83,7 +83,7 @@ int Barra::getY2() {
     return y2;
 }
 
-void generarAleatorio(int MEDIA, int VARIANZA, int BARRAS_DESEADAS, float altoBarra[]);
+void generarAleatorio(int MEDIA, int VARIANZA, int BARRAS_DESEADAS, int altoBarra[]);
 
 int main (int argc, char* argv[]) {
     
@@ -112,7 +112,7 @@ int main (int argc, char* argv[]) {
 
     Barra barras[BARRAS_DESEADAS];
     
-    float altoBarra[BARRAS_DESEADAS];
+    int altoBarra[BARRAS_DESEADAS];
     generarAleatorio(MEDIA, VARIANZA, BARRAS_DESEADAS, altoBarra);
 
     printf("\n\tBarras: %d\n\tLímite superior: %d\n\n", BARRAS_DESEADAS, LIMITE_SUPERIOR);
@@ -168,7 +168,6 @@ int main (int argc, char* argv[]) {
         }
     }
     
-    
     /*  Mientras no se escriba por teclado una letra 'q' se ejecuta el programa  */
 
     while (1) {
@@ -182,10 +181,16 @@ int main (int argc, char* argv[]) {
     return 0;
 }
 
-void generarAleatorio(int MEDIA, int VARIANZA, int BARRAS_DESEADAS, float altoBarra[]) {
+/*  Función que genera los números aleatorios con forme a la distribución normal utilizando el algritmo de TLC  */
+
+void generarAleatorio(int MEDIA, int VARIANZA, int BARRAS_DESEADAS, int altoBarra[]) {
     float aux, num;
     float desv = sqrt(VARIANZA);
     int i, k;
+    
+    int valores[BARRAS_DESEADAS];
+    
+    /*  Genera los número aleatorios y alimenta un arreglo  */
     
     for (i = 1; i <= BARRAS_DESEADAS; i ++) {
         aux = 0;
@@ -196,11 +201,30 @@ void generarAleatorio(int MEDIA, int VARIANZA, int BARRAS_DESEADAS, float altoBa
         
         num = desv * sqrt((float)12 / 1000) * (aux - (float)1000 / 2) + MEDIA;
         
-        altoBarra[i - 1] = num;
+        valores[i - 1] = num;
+//        printf("%d ", (int)num);
+    }
+    
+//    printf("\n");
+    
+    /*  Llena de 0's el arreglo para eliminar basura  */
+    
+    for (int k = 0; k < BARRAS_DESEADAS; k ++) {
+        altoBarra[k] = 0;
     }
 
-}
+    /*  Cuenta las veces que se repite un número para generar el histograma  */
+    
+    for (int k = 0; k < BARRAS_DESEADAS; k ++) {
+        for (int l = 0; l < BARRAS_DESEADAS; l ++) {
+            if (valores[l] == k) {
+                altoBarra[k] ++;
+            }
+        }
+    }
+    
+//    for (int j = 0; j < BARRAS_DESEADAS; j ++) {
+//        printf("%d ", altoBarra[j]);
+//    }
 
-//int generarAleatorio(int LIMITE_SUPERIOR) {
-//    return rand() % LIMITE_SUPERIOR + 1;
-//}
+}
