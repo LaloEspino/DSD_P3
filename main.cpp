@@ -93,6 +93,17 @@ int main (int argc, char* argv[]) {
     const int BARRAS_DESEADAS   = atoi(argv[1]);
     const int LIMITE_SUPERIOR   = atoi(argv[2]);
     
+    /*  Variables de longitud  */
+//    const int AUX_ANCHO_BARRA   = 50;
+//    const int ESPACIO_BARRA     = 20;
+//    const int ANCHO_BARRA       = (50 + 20);
+//    const int ALTO_BARRA        = 100;
+
+    const int AUX_ANCHO_BARRA   = 10;
+    const int ESPACIO_BARRA     = AUX_ANCHO_BARRA / 2;
+    const int ANCHO_BARRA       = AUX_ANCHO_BARRA + ESPACIO_BARRA;
+    const int ALTO_BARRA        = AUX_ANCHO_BARRA * 2;
+
     int xMax = 0;
     
     Barra barras[BARRAS_DESEADAS];
@@ -116,29 +127,29 @@ int main (int argc, char* argv[]) {
             switch (i) {
                 case 0: /*  Para crear primera linea  */
                     
-                    barras[j].setX1((50 + 20) * j);
-                    barras[j].setY1(500);
+                    barras[j].setX1(ANCHO_BARRA * j);
+                    barras[j].setY1(GFX_HEIGHT);
                     
-                    barras[j].setX2((50 + 20) * j);
-                    barras[j].setY2(100 * xMax);
+                    barras[j].setX2(ANCHO_BARRA * j);
+                    barras[j].setY2(GFX_HEIGHT - (ALTO_BARRA * xMax));
 
                     break;
                 case 1: /*  Para crear linea interseptora */
                     
-                    barras[j].setX1((50 + 20) * j);
+                    barras[j].setX1(ANCHO_BARRA * j);
                     barras[j].setY1(barras[j].getY2());
                     
-                    barras[j].setX2((50 + 20) * j + 50);
-                    barras[j].setY2(100 * xMax);
+                    barras[j].setX2(ANCHO_BARRA * j + AUX_ANCHO_BARRA);
+                    barras[j].setY2(GFX_HEIGHT - (ALTO_BARRA * xMax));
 
                     break;
                 case 2: /*  Para crear segunda linea  */
                     
-                    barras[j].setX1((50 + 20) * j + 50);
+                    barras[j].setX1(ANCHO_BARRA * j + AUX_ANCHO_BARRA);
                     barras[j].setY1(barras[j].getY2());
 
-                    barras[j].setX2((50 + 20) * j + 50);
-                    barras[j].setY2(500);
+                    barras[j].setX2(ANCHO_BARRA * j + AUX_ANCHO_BARRA);
+                    barras[j].setY2(GFX_HEIGHT);
 
                     break;
                 default:
