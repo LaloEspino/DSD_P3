@@ -95,7 +95,7 @@ int main (int argc, char* argv[]) {
     
     int xMax = 0;
     
-    Barra barras;
+    Barra barras[BARRAS_DESEADAS];
 
     printf("\n\tBarras: %d\n\tLímite superior: %d\n\n", BARRAS_DESEADAS, LIMITE_SUPERIOR);
 
@@ -116,39 +116,40 @@ int main (int argc, char* argv[]) {
             switch (i) {
                 case 0: /*  Para crear primera linea  */
                     
-                    barras.setX1((50 + 20) * j);
-                    barras.setY1(500);
+                    barras[j].setX1((50 + 20) * j);
+                    barras[j].setY1(500);
                     
-                    barras.setX2((50 + 20) * j);
-                    barras.setY2(100 * xMax);
+                    barras[j].setX2((50 + 20) * j);
+                    barras[j].setY2(100 * xMax);
 
                     break;
                 case 1: /*  Para crear linea interseptora */
                     
-                    barras.setX1((50 + 20) * j);
-                    barras.setY1(barras.getY2());
+                    barras[j].setX1((50 + 20) * j);
+                    barras[j].setY1(barras[j].getY2());
                     
-                    barras.setX2((50 + 20) * j + 50);
-                    barras.setY2(100 * xMax);
+                    barras[j].setX2((50 + 20) * j + 50);
+                    barras[j].setY2(100 * xMax);
 
                     break;
                 case 2: /*  Para crear segunda linea  */
                     
-                    barras.setX1((50 + 20) * j + 50);
-                    barras.setY1(barras.getY2());
+                    barras[j].setX1((50 + 20) * j + 50);
+                    barras[j].setY1(barras[j].getY2());
 
-                    barras.setX2((50 + 20) * j + 50);
-                    barras.setY2(500);
+                    barras[j].setX2((50 + 20) * j + 50);
+                    barras[j].setY2(500);
 
                     break;
                 default:
                     break;
             }
-            
-            barras.graficarBarra();
+
+            barras[j].graficarBarra();
             
         }
     }
+    
     
     /*  Mientras no se escriba por teclado una letra 'q' se ejecuta el programa  */
 
