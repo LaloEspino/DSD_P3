@@ -15,13 +15,19 @@
 
 #include "gfx.h"
 #include <iostream>
+#include <stdio.h>      /* printf, NULL */
+#include <stdlib.h>     /* strtod */
 
 using namespace std;
 
-int main(int args, char* argv[]) {
+int main (int argc, char* argv[]) {
     const int GFX_WIDTH = 500;
     const int GFX_HEIGHT = 500;
     const char GFX_TITLE[] = "Proyecto 3 DSD";
+    
+    const int barras = atoi(argv[1]);
+    printf("Barras: %d\n", barras);
+    // << "Barras: " << barras << endl;
     
     char exit;
     
@@ -33,7 +39,7 @@ int main(int args, char* argv[]) {
     int x2 = 0;
     int y2 = 0;
     
-    int barras = 2;
+//    int barras = 2;
 
 //    int x1 = 0; // (50 + 20) * indice
 //    int y1 = 500;
