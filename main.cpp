@@ -32,35 +32,39 @@ int main(int args, char* argv[]) {
     int y1 = 0;
     int x2 = 0;
     int y2 = 0;
+    
+    int barras = 2;
 
-    for (int i = 0; i < 3; i ++) {
-        switch (i) {
-            case 0:
-                x1 = 0;
-                y1 = 500;
-                
-                x2 = 0;
-                y2 = 100;
-                break;
-            case 1:
-                x1 = x2;
-                y1 = y2;
-                
-                x2 = 50;
-                y2 = 100;
-                break;
-            case 2:
-                x1 = x2;
-                y1 = y2;
-                
-                x2 = 50;
-                y2 = 500;
-                break;
-            default:
-                break;
+    for (int j = 0; j < barras; j ++) {
+        for (int i = 0; i < 3; i ++) {
+            switch (i) {
+                case 0:
+                    x1 = 0;
+                    y1 = 500;
+                    
+                    x2 = 0;
+                    y2 = 100;
+                    break;
+                case 1:
+                    x1 = x2;
+                    y1 = y2;
+                    
+                    x2 = 50;
+                    y2 = 100;
+                    break;
+                case 2:
+                    x1 = x2;
+                    y1 = y2;
+                    
+                    x2 = 50;
+                    y2 = 500;
+                    break;
+                default:
+                    break;
+            }
+            
+            gfx_line(x1, y1, x2, y2);
         }
-        
-        gfx_line(x1, y1, x2, y2);
     }
 
     while (1) {
