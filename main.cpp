@@ -35,6 +35,24 @@ int main(int args, char* argv[]) {
     
     int barras = 2;
 
+//    int x1 = 0; // (50 + 20) * indice
+//    int y1 = 500;
+//
+//    int x2 = 0; // (50 + 20) * indice
+//    int y2 = 100; // Altura de algoritmo
+//
+//    int x1 = x2;
+//    int y1 = y2;
+//
+//    int x2 = 50 // Grueso de la grafica
+//    int y2 = 100;
+//
+//    int x1 = x2;
+//    int y1 = y2;
+//
+//    int x2 = 50 // Grueso de la grafica
+//    int y2 = 500;
+
     for (int j = 0; j < barras; j ++) {
         for (int i = 0; i < 3; i ++) {
             switch (i) {
