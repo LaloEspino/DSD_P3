@@ -28,14 +28,41 @@ int main(int args, char* argv[]) {
     gfx_open(GFX_WIDTH, GFX_HEIGHT, GFX_TITLE);
     gfx_color(0,200,100);
     
-    gfx_line(0, 500, 0, 100);
-    gfx_line(0, 100, 50, 100);
-    gfx_line(50, 100, 50, 500);
-    
-    gfx_line(70, 500, 70, 100);
-    gfx_line(70, 100, 120, 100);
-    gfx_line(120, 100, 120, 500);
-    
+    int x1 = 0;
+    int y1 = 0;
+    int x2 = 0;
+    int y2 = 0;
+
+    for (int i = 0; i < 3; i ++) {
+        switch (i) {
+            case 0:
+                x1 = 0;
+                y1 = 500;
+                
+                x2 = 0;
+                y2 = 100;
+                break;
+            case 1:
+                x1 = x2;
+                y1 = y2;
+                
+                x2 = 50;
+                y2 = 100;
+                break;
+            case 2:
+                x1 = x2;
+                y1 = y2;
+                
+                x2 = 50;
+                y2 = 500;
+                break;
+            default:
+                break;
+        }
+        
+        gfx_line(x1, y1, x2, y2);
+    }
+
     while (1) {
         exit = gfx_wait();
         if (exit == 'q') {
