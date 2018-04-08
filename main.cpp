@@ -38,8 +38,6 @@ int main (int argc, char* argv[]) {
     int y1 = 0;
     int x2 = 0;
     int y2 = 0;
-    
-//    int barras = 2;
 
 //    int x1 = 0; // (50 + 20) * indice
 //    int y1 = 500;
@@ -58,6 +56,14 @@ int main (int argc, char* argv[]) {
 //
 //    int x2 = 50 // Grueso de la grafica
 //    int y2 = 500;
+
+//    gfx_line(0, 500, 0, 100);
+//    gfx_line(0, 100, 50, 100);
+//    gfx_line(50, 100, 50, 500);
+//
+//    gfx_line(70, 500, 70, 100);
+//    gfx_line(70, 100, 120, 100);
+//    gfx_line(120, 100, 120, 500);
 
     for (int j = 0; j < barras; j ++) {
         for (int i = 0; i < 3; i ++) {
