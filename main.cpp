@@ -19,6 +19,7 @@
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+#include <math.h>
 
 using namespace std;
 
@@ -82,6 +83,8 @@ int Barra::getY2() {
     return y2;
 }
 
+void generarAleatorio(int MEDIA, int VARIANZA, int BARRAS_DESEADAS, float altoBarra[]);
+
 int main (int argc, char* argv[]) {
     
     /*  Variables de gfx  */
@@ -103,10 +106,14 @@ int main (int argc, char* argv[]) {
     const int ESPACIO_BARRA     = AUX_ANCHO_BARRA / 2;
     const int ANCHO_BARRA       = AUX_ANCHO_BARRA + ESPACIO_BARRA;
     const int ALTO_BARRA        = AUX_ANCHO_BARRA * 2;
-
-    int xMax = 0;
     
+    const int MEDIA             = LIMITE_SUPERIOR;
+    const int VARIANZA          = MEDIA / 3;
+
     Barra barras[BARRAS_DESEADAS];
+    
+    float altoBarra[BARRAS_DESEADAS];
+    generarAleatorio(MEDIA, VARIANZA, BARRAS_DESEADAS, altoBarra);
 
     printf("\n\tBarras: %d\n\tLímite superior: %d\n\n", BARRAS_DESEADAS, LIMITE_SUPERIOR);
 
@@ -120,7 +127,7 @@ int main (int argc, char* argv[]) {
 
     for (int j = 0; j < BARRAS_DESEADAS; j ++) { /*  Se ejecuta por el número deseado de barras  */
 
-        xMax = rand() % LIMITE_SUPERIOR + 1;
+//        altoBarra[j] = generarAleatorio(LIMITE_SUPERIOR);
 
         for (int i = 0; i < 3; i ++) { /*  Genera las lineas de una barra  */
             
@@ -131,7 +138,7 @@ int main (int argc, char* argv[]) {
                     barras[j].setY1(GFX_HEIGHT);
                     
                     barras[j].setX2(ANCHO_BARRA * j);
-                    barras[j].setY2(GFX_HEIGHT - (ALTO_BARRA * xMax));
+                    barras[j].setY2(GFX_HEIGHT - (ALTO_BARRA * altoBarra[j]));
 
                     break;
                 case 1: /*  Para crear linea interseptora */
@@ -140,7 +147,7 @@ int main (int argc, char* argv[]) {
                     barras[j].setY1(barras[j].getY2());
                     
                     barras[j].setX2(ANCHO_BARRA * j + AUX_ANCHO_BARRA);
-                    barras[j].setY2(GFX_HEIGHT - (ALTO_BARRA * xMax));
+                    barras[j].setY2(GFX_HEIGHT - (ALTO_BARRA * altoBarra[j]));
 
                     break;
                 case 2: /*  Para crear segunda linea  */
@@ -174,3 +181,26 @@ int main (int argc, char* argv[]) {
     
     return 0;
 }
+
+void generarAleatorio(int MEDIA, int VARIANZA, int BARRAS_DESEADAS, float altoBarra[]) {
+    float aux, num;
+    float desv = sqrt(VARIANZA);
+    int i, k;
+    
+    for (i = 1; i <= BARRAS_DESEADAS; i ++) {
+        aux = 0;
+        
+        for (k = 1 ; k <= 1000; k ++) {
+            aux = aux + (float)rand() / RAND_MAX;
+        }
+        
+        num = desv * sqrt((float)12 / 1000) * (aux - (float)1000 / 2) + MEDIA;
+        
+        altoBarra[i - 1] = num;
+    }
+
+}
+
+//int generarAleatorio(int LIMITE_SUPERIOR) {
+//    return rand() % LIMITE_SUPERIOR + 1;
+//}
