@@ -15,19 +15,25 @@
 
 #include "gfx.h"
 #include <iostream>
+#include <stdio.h>      /* printf, scanf, puts, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
 
 using namespace std;
 
 int main (int argc, char* argv[]) {
-    const int GFX_WIDTH = 500;
-    const int GFX_HEIGHT = 500;
-    const char GFX_TITLE[] = "Proyecto 3 DSD";
     
-    const int barras = atoi(argv[1]);
-    printf("Barras: %d\n", barras);
+    /*  Variables de gfx  */
+    const int GFX_WIDTH         = 1000;
+    const int GFX_HEIGHT        = 500;
+    const char GFX_TITLE[]      = "Proyecto 3 DSD";
     
-    char exit;
-    
+    /*  Variables de negocio  */
+    const int BARRAS            = atoi(argv[1]);
+    const int LIMITE_SUPERIOR   = atoi(argv[2]);
+
+    printf("Barras: %d\nLímite superior: %d\n", BARRAS, LIMITE_SUPERIOR);
+
     gfx_open(GFX_WIDTH, GFX_HEIGHT, GFX_TITLE);
     gfx_color(0,200,100);
     
@@ -35,34 +41,14 @@ int main (int argc, char* argv[]) {
     int y1 = 0;
     int x2 = 0;
     int y2 = 0;
+    
+    char exit;
+    
+    int xMax = 0;
+    srand (time(NULL));
 
-//    int x1 = 0; // (50 + 20) * indice
-//    int y1 = 500;
-//
-//    int x2 = 0; // (50 + 20) * indice
-//    int y2 = 100; // Altura de algoritmo
-//
-//    int x1 = x2;
-//    int y1 = y2;
-//
-//    int x2 = 50 // Grueso de la grafica
-//    int y2 = 100;
-//
-//    int x1 = x2;
-//    int y1 = y2;
-//
-//    int x2 = 50 // Grueso de la grafica
-//    int y2 = 500;
-
-//    gfx_line(0, 500, 0, 100);
-//    gfx_line(0, 100, 50, 100);
-//    gfx_line(50, 100, 50, 500);
-//
-//    gfx_line(70, 500, 70, 100);
-//    gfx_line(70, 100, 120, 100);
-//    gfx_line(120, 100, 120, 500);
-
-    for (int j = 0; j < barras; j ++) {
+    for (int j = 0; j < BARRAS; j ++) {
+        xMax = rand() % LIMITE_SUPERIOR + 1;
         for (int i = 0; i < 3; i ++) {
             switch (i) {
                 case 0:
@@ -70,14 +56,14 @@ int main (int argc, char* argv[]) {
                     y1 = 500;
                     
                     x2 = (50 + 20) * j;
-                    y2 = 100;
+                    y2 = 100 * xMax;
                     break;
                 case 1:
                     x1 = (50 + 20) * j;
                     y1 = y2;
                     
                     x2 = (50 + 20) * j + 50;
-                    y2 = 100;
+                    y2 = 100 * xMax;
                     break;
                 case 2:
                     x1 = (50 + 20) * j + 50;
