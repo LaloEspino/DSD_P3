@@ -7,8 +7,9 @@
 //  Para compilar el archivo escriba el siguiente comando en terminal:
 //  gcc main.cpp gfx.c -o main -I/usr/X11R6/include -L/usr/X11R6/lib -lX11 -lm
 //
-//  Para ejecutar el programa escriba lo siguiente en terminal: (n es el número de barras que van a aparecer)
-//  ./main n
+//  Para ejecutar el programa escriba lo siguiente en terminal:
+//  (n es el número de barras que van a aparecer y m el límite superior que tendrán)
+//  ./main n m
 //
 //  Cuando la ventana de XQuartz esté abierta presione la tecla 'q' para salir
 //
@@ -29,43 +30,49 @@ int main (int argc, char* argv[]) {
     const char GFX_TITLE[]      = "Proyecto 3 DSD";
     
     /*  Variables de negocio  */
-    const int BARRAS            = atoi(argv[1]);
+    const int BARRAS_DESEADAS   = atoi(argv[1]);
     const int LIMITE_SUPERIOR   = atoi(argv[2]);
 
-    printf("Barras: %d\nLímite superior: %d\n", BARRAS, LIMITE_SUPERIOR);
+    printf("\n\tBarras: %d\n\tLímite superior: %d\n\n", BARRAS_DESEADAS, LIMITE_SUPERIOR);
 
+    /*  Creación de ventana de gfx y asignación de colores a lineas  */
     gfx_open(GFX_WIDTH, GFX_HEIGHT, GFX_TITLE);
-    gfx_color(0,200,100);
+    gfx_color(0, 200, 100);
     
+    /*  Variables de barras  */
+
     int x1 = 0;
     int y1 = 0;
     int x2 = 0;
     int y2 = 0;
-    
-    char exit;
-    
     int xMax = 0;
-    srand (time(NULL));
 
-    for (int j = 0; j < BARRAS; j ++) {
+    char exit; /*  Variable para fin de ejecución de programa  */
+    
+    srand (time(NULL)); /*  Random seed  */
+
+    for (int j = 0; j < BARRAS_DESEADAS; j ++) { /*  Se ejecuta por el número deseado de barras  */
+      
         xMax = rand() % LIMITE_SUPERIOR + 1;
-        for (int i = 0; i < 3; i ++) {
+        
+        for (int i = 0; i < 3; i ++) { /*  Genera las lineas de una barra  */
+            
             switch (i) {
-                case 0:
+                case 0: /*  Para crear primera linea  */
                     x1 = (50 + 20) * j;
                     y1 = 500;
                     
                     x2 = (50 + 20) * j;
                     y2 = 100 * xMax;
                     break;
-                case 1:
+                case 1: /*  Para crear linea interseptora */
                     x1 = (50 + 20) * j;
                     y1 = y2;
                     
                     x2 = (50 + 20) * j + 50;
                     y2 = 100 * xMax;
                     break;
-                case 2:
+                case 2: /*  Para crear segunda linea  */
                     x1 = (50 + 20) * j + 50;
                     y1 = y2;
                     
@@ -76,12 +83,16 @@ int main (int argc, char* argv[]) {
                     break;
             }
             
+            /*  Dibuja la linea correspondiente con los parametros establecidos  */
             gfx_line(x1, y1, x2, y2);
         }
     }
+    
+    /*  Mientras no se escriba por teclado una letra 'q' se ejecuta el programa  */
 
     while (1) {
         exit = gfx_wait();
+        
         if (exit == 'q') {
             break;
         }
